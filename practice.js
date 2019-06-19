@@ -244,3 +244,4 @@ function bind(fn, thisArg, ...outerArgs){
     return fn.apply(thisArg, [...outerArgs, ...innerArgs])
   }
 }
+  bind(subtractFourNumbers,this,1,2,3,4,5)(6,7,8,9,10)
