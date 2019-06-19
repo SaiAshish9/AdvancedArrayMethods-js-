@@ -218,8 +218,7 @@ function placeInMiddle(arr, vals){
 function joinArrays(...args){
   return args.reduce((acc, next) => acc.concat(next), [])
 }
-  joinArrays(1,2,3,4)
-
+joinArrays(1,2,3,4)
 // rest
 function sumEvenArgs(...args){
   return args.reduce((acc, next) => next % 2 === 0 ? acc += next : acc, 0)
@@ -232,9 +231,9 @@ function flip(fn, thisArg, ...outerArgs){
     return fn.apply(thisArg, allArgs.reverse());
   }
 }
-  function subtractFourNumbers(a,b,c,d){
-        return a-b-c-d;
-    }
+function subtractFourNumbers(a,b,c,d){
+      return a-b-c-d;
+  }
 
 flip(subtractFourNumbers,this,1,3,4,5)(2,3,4) //5-4-3-1=-3
 
@@ -244,4 +243,35 @@ function bind(fn, thisArg, ...outerArgs){
     return fn.apply(thisArg, [...outerArgs, ...innerArgs])
   }
 }
-  bind(subtractFourNumbers,this,1,2,3,4,5)(6,7,8,9,10)
+bind(subtractFourNumbers,this,1,2,3,4,5)(6,7,8,9,10)
+
+//objectEnhancement And Object/Array Destructuring
+function displayStudentInfo(obj){
+  var {first, last} = obj;
+  return `Your full name is ${first} ${last}`
+}
+
+function printFullName({first,last}){
+  return `Your full name is ${first} ${last}`
+}
+
+function createStudent({likesJavaScript = true, likesES2015 = true} = {}){
+  var start = 'The student';
+  if(likesJavaScript && likesES2015){
+    start += ' likes JavaScript and ES2015'
+  } else if(likesJavaScript){
+    start += ' likes JavaScript!'
+  } else if(likesES2015){
+    start += ' likes ES2015!'
+  } else {
+    start += ' does not like much...'
+  }
+  return start;
+}
+
+function reverseArray(arr){
+  for(var i = 0; i < arr.length/2; i++){
+    [arr[i], arr[arr.length - 1 - i]] = [arr[arr.length - 1 - i], arr[i]]
+  }
+  return arr;
+}
