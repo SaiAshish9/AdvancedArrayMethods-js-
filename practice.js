@@ -232,6 +232,11 @@ function flip(fn, thisArg, ...outerArgs){
     return fn.apply(thisArg, allArgs.reverse());
   }
 }
+  function subtractFourNumbers(a,b,c,d){
+        return a-b-c-d;
+    }
+
+flip(subtractFourNumbers,this,1,3,4,5)(2,3,4) //5-4-3-1=-3
 
 // rest + spread
 function bind(fn, thisArg, ...outerArgs){
