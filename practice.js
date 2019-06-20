@@ -404,3 +404,61 @@ function countPairs(arr, num){
     }
     return count;
 }
+
+//promises.all
+
+function getMostFollowers(...usernames){
+  let baseUrl = "https://api.github.com/users/"
+  let urls = usernames.map(username => $.getJSON(baseUrl + username));
+  return Promise.all(urls).then(function(data){
+    let max = data.sort((a,b) => a.followers < b.followers)[0];
+    return `${max.login} has the most followers with ${max.followers}`
+  })
+}
+getMostFollowers('saiashish9','mayank0707').then(data=>console.log(data))
+
+//run this code on jquery.com
+
+function starWarsString(id){
+  var str = '';
+  return $.getJSON(`https://swapi.co/api/people/${id}/`).then(function(data){
+    str += `${data.name} is featured in `;
+    var filmData = data.films[0]
+    return $.getJSON(filmData);
+  }).then(function(res){
+    str += `${res.title}, directed by ${res.director} `
+    var planetData = res.planets[0]
+    return $.getJSON(planetData)
+  }).then(function(res){
+    str += `and it takes place on ${res.name}`;
+    return str;
+  }).then(function(finalString){
+    return finalString
+  })
+}
+
+starWarsString(1).then(data=>console.log(data))
+//run this code on jquery.com
+// Array.from
+// Object.assign
+// Number.isFinite
+
+function copyObject(obj){
+  return Object.assign({}, obj)
+}
+
+function checkIfFinite(num){
+  return Number.isFinite(num)
+}
+
+function areAllNumbersFinite(arr){
+  return arr.every(Number.isFinite)
+}
+
+function convertArrayLikeObject(obj){
+  return Array.from(obj)
+}
+
+function displayEvenArguments(){
+  return Array.from(arguments).filter(val => val % 2 === 0);
+}
